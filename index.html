@@ -71,6 +71,7 @@ inputBox.onkeydown = (event)=>{
 socket.on('message_received', (message)=>{
 	messageBox.innerText += message.trim();
 	messageBox.innerHTML += "<br />"
+	messageBox.scrollTop = messageBox.scrollHeight;
 });
 
 function sendMessage(){
