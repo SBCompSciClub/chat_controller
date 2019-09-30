@@ -62,6 +62,7 @@ sendButton.onclick = ()=>{
 
 inputBox.onkeydown = (event)=>{
 	if(event.which === 13 || event.charCode === 13){
+		event.preventDefault();
 		sendMessage();
 	}
 }
