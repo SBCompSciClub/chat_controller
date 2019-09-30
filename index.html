@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Chat Controller</title>
+		<script src="/socket.io/socket.io.js"></script>
+		<style>
+
+body {
+	font-family: monospace;
+}
+
+#container {
+	border: 1px solid;
+	width: 400px;
+	height: 400px;
+}
+
+#messages {
+	border: 1px solid;
+	height: 370px;
+	overflow-y: auto;
+}
+
+#input {
+	width: 330px;
+	height: 18px;
+	background-color: #EEEEEE;
+	margin-top: 0px;
+	padding: 5px;
+	float: left;
+}
+
+button {
+	display: block;
+	text-align: center;
+	width: 60px;
+	height: 30px;
+	float: left;
+}
+
+		</style>	
+	</head>
+	<body>
+		<div id="container">
+			<div id="messages"><b>Chat</b><br /></div>
+			<p contenteditable id="input" style="overflow-x: auto;"></p>
+			<button type="button" id="send">Send</button>
+		</div>	
+		<script>
+
+const socket = io('/chat');
+
+let username = prompt("Enter a username");
+
+let messageBox = document.querySelector("#messages");
+let inputBox = document.querySelector("#input");
+let sendButton = document.querySelector("#send");
+
+sendButton.onclick = ()=>{
+	sendMessage();
+}
+
+inputBox.onkeydown = (event)=>{
+	if(event.which === 13 || event.charCode === 13){
+		sendMessage();
+	}
+}
+
+
+socket.on('message_received', (message)=>{
+	messageBox.innerText += message.trim();
+	messageBox.innerHTML += "<br />"
+});
+
+function sendMessage(){
+	let message = inputBox.innerText;
+	inputBox.innerText = "";
+	socket.emit('message_sent', {
+		"username": username,
+		"body": message
+	});
+}
+
+		</script>
+	</body>	
+</html>
