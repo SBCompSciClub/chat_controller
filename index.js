@@ -7,7 +7,7 @@ let filter = new Filter();
 
 let messages = [];
 
-app.use(express.static('/'));
+app.use(express.static('res'));
 
 app.all('/', (req, res)=>{
 	res.sendFile(__dirname + "/index.html");
