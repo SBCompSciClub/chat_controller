@@ -42,8 +42,8 @@ button {
 	body{
 		font-family: 'Comic Sans MS', 'Marker Felt', sans-serif;
 		background-color: #AED6F1;
-		height: 500px;
-		width: 500px;
-		/*zoom: 150%;*/
+		height: 400px;
+		width: 400px;
+		zoom: 90%
 	}
 }
