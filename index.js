@@ -56,7 +56,7 @@ chatSpace.on('connection', (socket)=>{
 			}
 			keyData.push(keyLetter);
 		//	console.log(keyData);
-			chatSpace.emit("message_received", `${fliter.clean(message.username)}: ${filter.clean(message.body)}`);
+			chatSpace.emit("message_received", `${filter.clean(message.username)}: ${filter.clean(message.body)}`);
 		}
 	});
 });
