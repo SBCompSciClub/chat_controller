@@ -45,7 +45,7 @@ chatSpace.on('connection', (socket)=>{
 		console.log('User disconnected');	
 	});
 	socket.on('message_sent', (message)=>{
-		console.log("MESSAGE");
+		//console.log("MESSAGE");
 		
 		let timeSinceLast = (new Date).getTime() - participants.get(socket.id);	
 		if(timeSinceLast > updateDelay){
@@ -55,7 +55,7 @@ chatSpace.on('connection', (socket)=>{
 				keyData.shift();
 			}
 			keyData.push(keyLetter);
-			console.log(keyData);
+		//	console.log(keyData);
 			chatSpace.emit("message_received", `${fliter.clean(message.username)}: ${filter.clean(message.body)}`);
 		}
 	});
