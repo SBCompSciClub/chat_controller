@@ -2,78 +2,38 @@
 <html>
 	<head>
 		<title>Chat Controller</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<script src="/socket.io/socket.io.js"></script>
-		<style>
-
-body {
-	font-family: monospace;
-}
-
-#container {
-	border: 1px solid;
-	width: 400px;
-	height: 400px;
-}
-
-#messages {
-	border: 1px solid;
-	height: 370px;
-	overflow-y: auto;
-}
-
-#input {
-	width: 330px;
-	height: 18px;
-	background-color: #EEEEEE;
-	margin-top: 0px;
-	padding: 5px;
-	float: left;
-}
-
-button {
-	display: block;
-	text-align: center;
-	width: 60px;
-	height: 30px;
-	float: left;
-}
-
-		</style>	
+		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
+		<h1 class = 'header'>Chat Room</h1>
+		<h3 class = 'header'>Powered by the CS Club</h3>
 		<div id="container">
-			<div id="messages"><b>Chat</b><br /></div>
+			<div id="messages" style = "text-align:center;"><b>Chat</b><br /></div>
 			<p contenteditable id="input" style="overflow-x: auto;"></p>
-			<button type="button" id="send">Send</button>
+			<button type="button" id="send" style = "font-family:'Comic Sans MS', cursive,sans-serif;">Send</button>
 		</div>	
 		<script>
-
 const socket = io('/chat');
-
 let username = prompt("Enter a username");
-
 let messageBox = document.querySelector("#messages");
 let inputBox = document.querySelector("#input");
 let sendButton = document.querySelector("#send");
-
 sendButton.onclick = ()=>{
 	sendMessage();
 }
-
 inputBox.onkeydown = (event)=>{
 	if(event.which === 13 || event.charCode === 13){
 		event.preventDefault();
 		sendMessage();
 	}
 }
-
-
 socket.on('message_received', (message)=>{
 	messageBox.innerText += message.trim();
 	messageBox.innerHTML += "<br />"
 	messageBox.scrollTop = messageBox.scrollHeight;
 });
-
 function sendMessage(){
 	let message = inputBox.innerText;
 	inputBox.innerText = "";
@@ -82,7 +42,6 @@ function sendMessage(){
 		"body": message
 	});
 }
-
 		</script>
 	</body>	
 </html>
