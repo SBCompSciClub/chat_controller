@@ -21,7 +21,7 @@ let keyData = [];
 
 let updateDelay = 30;
 let decay = 1000;
-let maxQueueLength = 10; 
+let maxQueueLength = 30; 
 
 readers.on('connection', (socket)=>{
 	console.log('Reader connected');
