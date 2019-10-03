@@ -2,7 +2,7 @@ let express = require('express');
 let app = express();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
-let Filter = require('bad-words'),
+let Filter = require('bad-words');
 let filter = new Filter();
 
 let messages = [];
