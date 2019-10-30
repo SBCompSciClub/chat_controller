@@ -1,9 +1,9 @@
-let express = require('express');
-let app = express();
-let http = require('http').Server(app);
-let io = require('socket.io')(http);
-let Filter = require('bad-words');
-let filter = new Filter();
+let express = require('express'),
+    app = express();
+    http = require('http').Server(app),
+    io = require('socket.io')(http),
+    Filter = require('bad-words'),
+    filter = new Filter();
 
 let messages = [];
 
@@ -13,15 +13,14 @@ app.all('/', (req, res)=>{
 	res.sendFile(__dirname + "/index.html");
 });
 
-const chatSpace = io.of('/chat');
-const readers = io.of('/readers');
+const chatSpace = io.of('/chat'),
+      readers = io.of('/readers');
 
-let participants = new Map();
-let keyData = [];
-
-let updateDelay = 30;
-let decay = 1000;
-let maxQueueLength = 30; 
+let participants = new Map(),
+    keyData = [],
+    updateDelay = 30,
+    decay = 1000,
+    maxQueueLength = 30; 
 
 readers.on('connection', (socket)=>{
 	console.log('Reader connected');
